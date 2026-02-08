@@ -1,0 +1,387 @@
+echo off
+title 工具箱  #shaojunzhen制作#
+goto menu
+:6
+cls
+echo        使用须知
+echo 1.本工具箱为shaojunzhen制作
+echo 2.输入内容后请按回车键
+echo 3.本工具箱有闪退现象
+echo 4.本工具箱有很多bug，请谨慎使用
+echo 5.部分功能需要用管理员权限
+echo 6.不可以使用空格键（按任意键除外）
+pause
+goto menu
+:menu
+cls
+echo  你好,用户
+date /t  
+echo                   菜单
+echo 1.计算机工具   2.信息查询   3.附属工具
+echo 4.休闲一刻        666.退出
+set/p cai=请输入数字（1-4 666）：
+if %cai%==1 goto 2
+if %cai%==2 goto 3
+if %cai%==3 goto 4
+if %cai%==4 goto 6
+if %cai%==666 goto 666
+echo 用户,输入错误
+pause
+goto menu
+:2
+echo 输入1打开放大镜 
+echo 输入2打开画图板 
+echo 输入3打开资源管理器 
+echo 输入4打开记事本
+echo 输入5打开屏幕键盘
+echo 输入6打开计算器
+echo 输入7打开控制面板
+echo 输入8打开计算机管理
+echo 输入9打开cmd
+echo 输入10打开远程控制
+echo 输入11打开恶意软件删除工具
+echo 输入12打开directX诊断工具
+echo 输入13打开本地组策略
+echo 输入14打开磁盘清理工具
+echo 输入15返回菜单
+set/p ca=请输入数字（1-15）：
+if %ca%==1 goto 12
+if %ca%==2 goto 22
+if %ca%==3 goto 32
+if %ca%==4 goto 42
+if %ca%==5 goto 52
+if %ca%==6 goto 62
+if %ca%==7 goto 72
+if %ca%==8 goto 82
+if %ca%==9 goto 92
+if %ca%==10 goto 102
+if %ca%==11 goto 112
+if %ca%==12 goto 122
+if %ca%==13 goto 132
+if %ca%==14 goto 142
+if %ca%==15 goto menu
+echo 用户,输入错误
+goto 2
+:12
+magnify
+pause
+goto menu
+:22
+mspaint
+pause
+goto menu
+:32
+explorer
+pause
+goto menu
+:42
+notepad
+pause
+goto menu
+:52
+osk
+pause
+goto menu
+:62
+calc
+pause
+goto menu
+:72
+control
+pause
+goto menu
+:82
+compmgmt.msc 
+pause
+goto menu
+:92
+start
+pause
+goto menu
+:102
+mstsc
+pause
+goto menu
+:112
+mrt
+pause
+goto menu
+:122
+dxdiag
+pause
+goto menu
+:132
+gpedit.msc
+echo 如果页面弹出'gpedit.msc' 不是内部或外部命令，也不是可运行的程序
+echo 或批处理文件。
+echo 说明你并没有配置本地组策略
+set/p msccc=输入1配置本地组策略(需管理员权限）输入2返回主菜单
+if %msccc%==1 goto mscc
+if %msccc%==2 goto menu
+echo 用户,输入错误
+goto 132
+:mscc
+pushd "%~dp0"
+dir /b %systemroot%\Windows\servicing\Packages\Microsoft-Windows-GroupPolicy-ClientExtensions-Package~3*.mum >gp.txt
+dir /b %systemroot%\servicing\Packages\Microsoft-Windows-GroupPolicy-ClientTools-Package~3*.mum >>gp.txt
+for /f %%i in ('findstr /i . gp.txt 2^>nul') do dism /online /norestart /add-package:"%systemroot%\servicing\Packages\%%i"
+pause
+goto menu
+:142
+cleanmgr
+pause
+goto menu
+:3
+echo 输入1 查本机ip 
+echo 输入2查局域网内所有ip
+echo 输入3查当前端口
+echo 输入4显示进程 
+echo 输入5用户管理
+echo 输入6查用过的wifi的详情信息  
+echo 输入7查网站ip
+echo 输入8显示磁盘空间
+echo 输入9显示内存使用情况
+echo 输入10查主机的详情信息
+echo 输入11返回菜单
+set/p c=请输入数字（1-11）：
+if %c%==1 goto 13
+if %c%==2 goto 23
+if %c%==3 goto 33
+if %c%==4 goto 43
+if %c%==5 goto 53
+if %c%==5 goto 53
+if %c%==6 goto 63
+if %c%==7 goto 73
+if %c%==8 goto 83
+if %c%==9 goto 93
+if %c%==10 goto 103
+if %c%==11 goto menu
+echo 用户,输入错误
+goto 3
+:13
+ipconfig
+pause
+goto menu
+:23
+arp -a
+pause
+goto menu
+:33
+netstat
+pause
+goto menu
+:43
+tasklist
+pause
+goto menu
+:53
+net user
+pause
+goto menu
+
+:63
+echo 输入1查所有的wifi 
+echo 输入2查wifi的详情信息
+echo 输入3返回菜单
+set/p wlan=请输入（1-3）：
+if %wlan%==1 goto profiles
+if %wlan%==2 goto mima
+if %wlan%==3 goto menu
+echo 用户,输入错误
+goto 63
+:profiles
+netsh wlan show profiles
+pause
+goto menu
+:mima
+set/p wifiname=请输入wifi名【关键信息即密码】：
+netsh wlan show profiles name= %wifiname%  key=clear
+pause
+goto menu
+:73
+set /p %wangzip%=输入网址：
+nslookup %wangzip%
+pause
+goto menu
+:83
+wmic logicaldisk get size,freespace
+pause
+goto menu
+:93
+wmic os get FreePhysicalMemory,TotalVisibleMemorySize
+pause
+goto menu
+:103
+systeminfo
+pause
+goto menu
+:4
+echo 输入1关机选项
+echo 输入2局域网内发消息（仅支持win7之前的系统）
+echo 输入3改颜色
+echo 输入4打开网址或文件地址
+echo 输入5修改日期
+echo 输入6修改时间
+echo 输入7修改开机密码(需管理员身份）
+echo 输入8抽取数字
+echo 输入9打开倒计时器
+echo 输入10删除指定文件
+echo 输入11修复磁盘(需管理员身份）
+echo 输入12清理缓存
+echo 输入13ping目标主机
+echo 输入14查看计算机中所有文件
+echo 输入15修复文件(需管理员身份）
+echo 输入16结束指定进程
+echo 输入17返回菜单
+set/p c4=请输入数字（1-17）：
+if %c4%==1 goto 14
+if %c4%==2 goto 24
+if %c4%==3 goto 34
+if %c4%==4 goto 44
+if %c4%==5 goto 54
+if %c4%==6 goto 64
+if %c4%==7 goto 74
+if %c4%==8 goto 84
+if %c4%==9 goto 94
+if %c4%==10 goto 104
+if %c4%==11 goto 114
+if %c4%==12 goto 124
+if %c4%==13 goto 134
+if %c4%==14 goto 144
+if %c4%==15 goto 154
+if %c4%==16 goto 164
+if %c4%==17 goto menu
+echo 用户,输入错误
+pause
+goto 4
+:14
+echo 输入1倒计时关机 
+echo 输入2倒计时重启  
+echo 输入3倒计时睡眠  
+echo 输入4取消关机/重启/睡眠  
+echo 输入5返回菜单
+set/p guanji=请输入数字（1-5）：
+if %guanji%==1 goto 11111
+if %guanji%==2 goto 22222 
+if %guanji%==3 goto 33333
+if %guanji%==4 goto 44444
+if %guanji%==5 goto menu
+echo 用户,输入错误
+goto 4
+:11111
+set/p time=请输入倒计时时间【秒】：
+shutdown -s -t %time%
+echo 用户,电脑将在 %time% 秒后关机
+pause
+goto menu
+:22222
+set/p times=请输入倒计时时间【秒】：
+shutdown -r -t %times%
+echo 用户,电脑将在 %times% 秒后重启
+pause
+goto menu
+:33333
+set/p timess=请输入倒计时时间【秒】：
+shutdown -h -t %timess%
+echo 用户,电脑将在 %timess% 秒后重启
+pause
+goto menu
+:44444
+shutdown -a
+echo 用户,取消成功
+pause
+goto menu
+:24
+set/p ipname=输入IP地址：
+set/p message=输入内容：
+net send %ipname% %message%
+pause
+goto menu
+:34
+echo 颜色属性由两个十六进制数字指定 -- 第一个
+echo 对应于背景，第二个对应于前景。每个数字
+echo 可以为以下任何值:
+echo 0 = 黑色       8 = 灰色
+echo 1 = 蓝色       9 = 淡蓝色
+echo 2 = 绿色       A = 淡绿色
+echo 3 = 浅绿色     B = 淡浅绿色 
+echo 4 = 红色       C = 淡红色
+echo 5 = 紫色       D = 淡紫色
+echo 6 = 黄色       E = 淡黄色
+echo 7 = 白色       F = 亮白色
+set/p col=请输入代码（只需输入数字或字母即可）：
+color %col%
+pause
+goto menu
+:44
+set/p https=请输入网址或文件地址：
+start %https%
+pause
+goto menu
+:54
+date
+echo 修改成功
+pause
+goto menu
+:64
+time
+echo 修改成功
+pause
+goto menu
+:74
+set/p xiugmm=请输入新的密码：
+net user Administrator %xiugmm%
+echo 密码为 %xiugmm%
+pause
+goto menu
+:84
+set /p q=请输入最大值：
+set /a PUZZLE=%random%%%%q%
+echo %PUZZLE%
+pause
+goto menu
+:94
+set/p q=请输入时间：
+timeout /t %q% /nobreak
+color 17
+color 07
+echo 时间到
+pause
+goto menu
+:104
+set/p sc=请输入文件地址：
+del %sc%
+pause
+goto menu
+:114
+set/p c=输入磁盘名（c-z):
+chkdsk %c%: /f/r
+pause
+goto menu
+:124
+del %temp%
+pause
+goto menu
+:134
+set /p ipv4=请输入目标主机ipv4:
+ping %ipv4%
+pause
+goto menu
+:144
+dir /s
+pause
+gotomenu
+:154
+sfc /scannow
+pause
+goto menu
+:164
+set /p process_name=请输入要结束的进程名称（例如：notepad.exe）:
+taskkill /f /im %process_name% 2>nul
+if %errorLevel%== 0  echo 进程已结束。
+pause
+goto menu
+:666
+exit
+
+
